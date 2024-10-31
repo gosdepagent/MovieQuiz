@@ -1,3 +1,4 @@
+
 import UIKit
 
 final class MovieQuizViewController: UIViewController {
@@ -40,27 +41,43 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        
             yesButton.layer.cornerRadius = 20
             yesButton.layer.masksToBounds = true
             
             noButton.layer.cornerRadius = 20
             noButton.layer.masksToBounds = true
             
+        
+        let firstQuestion = questions[currentQuestionIndex]
+                let firstStep = convert(model: firstQuestion)
+                showQuizStep(firstStep)
          
             func show(quiz step: QuizStepViewModel) {
                 imageView.image = step.image
                 textLabel.text = step.question
                 counterLabel.text = step.questionNumber
 
+                
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.showNextQuestionOrResults()
                 }
             }
         }
     
+    private func showQuizStep(_ step: QuizStepViewModel) {
+        imageView.image = step.image
+        textLabel.text = step.question
+        counterLabel.text = step.questionNumber
+        imageView.layer.borderColor = UIColor.clear.cgColor
+    }
     
   
+    
+    
     private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             correctAnswers += 1
@@ -156,12 +173,6 @@ final class MovieQuizViewController: UIViewController {
     }
     
    
-    private func showQuizStep(_ step: QuizStepViewModel) {
-        imageView.image = step.image
-        textLabel.text = step.question
-        counterLabel.text = step.questionNumber
-    }
-    
     
     private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
