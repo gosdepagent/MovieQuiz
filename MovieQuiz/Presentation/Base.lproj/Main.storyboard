@@ -25,20 +25,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-wp-DTf">
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-wp-DTf">
                                 <rect key="frame" x="20" y="69" width="390" height="829"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fro-zv-vxZ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qah-cD-WKm">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="24.666666666666668"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Вопрос" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L57-bV-xM5" userLabel="questionTitleLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="24.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="23.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-Tt-6aQ" userLabel="Index Label">
-                                                <rect key="frame" x="67.333333333333343" y="0.0" width="322.66666666666663" height="24.666666666666668"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-Tt-6aQ" userLabel="Index Label">
+                                                <rect key="frame" x="0.0" y="23.666666666666671" width="390" height="1"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
@@ -112,8 +112,6 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Tel-jR-GXL"/>
-                                                    <constraint firstAttribute="bottom" secondItem="YJ9-fk-IIf" secondAttribute="bottom" id="Zyt-Hn-DEj"/>
-                                                    <constraint firstAttribute="bottom" secondItem="FNU-Ks-gJQ" secondAttribute="bottom" id="gpf-zY-O8r"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -127,7 +125,6 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EnQ-wp-DTf" secondAttribute="bottom" id="Qwh-yO-cdm"/>
                             <constraint firstItem="EnQ-wp-DTf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gHp-c9-j2k"/>
-                            <constraint firstItem="gvv-Tt-6aQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="gTf-cA-yOa"/>
                             <constraint firstItem="EnQ-wp-DTf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="kEl-Ac-uUa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EnQ-wp-DTf" secondAttribute="trailing" constant="20" id="n8b-Hs-Phm"/>
                         </constraints>
