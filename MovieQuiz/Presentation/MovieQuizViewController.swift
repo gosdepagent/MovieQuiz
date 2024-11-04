@@ -7,7 +7,7 @@ final class MovieQuizViewController: UIViewController {
     private var correctAnswers = 0
     
     
-    @IBOutlet weak var questionTitleLabel: UILabel!
+    @IBOutlet private weak var questionTitleLabel: UILabel!
     
     @IBAction private func noButtonClicked(_ sender: Any) {
         let currentQuestion = questions[currentQuestionIndex]
@@ -27,8 +27,8 @@ final class MovieQuizViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var yesButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet private weak var yesButton: UIButton!
+    @IBOutlet private weak var noButton: UIButton!
     
     
     @IBOutlet private var imageView: UIImageView!

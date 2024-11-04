@@ -28,25 +28,28 @@
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-wp-DTf">
                                 <rect key="frame" x="20" y="69" width="390" height="829"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qah-cD-WKm">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="24.666666666666668"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qah-cD-WKm">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="24"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Вопрос" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L57-bV-xM5" userLabel="questionTitleLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="390" height="23.666666666666668"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" ambiguous="YES" text="Вопрос" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L57-bV-xM5" userLabel="questionTitleLabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="24"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-Tt-6aQ" userLabel="Index Label">
-                                                <rect key="frame" x="0.0" y="23.666666666666671" width="390" height="1"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvv-Tt-6aQ" userLabel="Index Label">
+                                                <rect key="frame" x="354" y="0.0" width="36" height="24"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="iGr-P4-aob"/>
+                                        </constraints>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eq2-Yr-0El" userLabel="Preview Image">
-                                        <rect key="frame" x="0.0" y="44.666666666666686" width="390" height="585"/>
+                                        <rect key="frame" x="0.0" y="44" width="390" height="585"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eq2-Yr-0El" secondAttribute="height" multiplier="2:3" id="4DA-fW-kq4"/>
@@ -58,10 +61,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkn-aQ-BMs" userLabel="Question Label">
-                                        <rect key="frame" x="0.0" y="649.66666666666663" width="390" height="99.333333333333371"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="99.5" id="032-Xj-DIo"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="649" width="390" height="100"/>
                                         <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                         <color key="textColor" name="YP White"/>
                                         <nil key="highlightedColor"/>
@@ -115,6 +115,9 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="JXV-gH-FgZ"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="Ise-85-UkM"/>
@@ -125,8 +128,8 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EnQ-wp-DTf" secondAttribute="bottom" id="Qwh-yO-cdm"/>
                             <constraint firstItem="EnQ-wp-DTf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gHp-c9-j2k"/>
-                            <constraint firstItem="EnQ-wp-DTf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="kEl-Ac-uUa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EnQ-wp-DTf" secondAttribute="trailing" constant="20" id="n8b-Hs-Phm"/>
+                            <constraint firstItem="EnQ-wp-DTf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qxE-WP-1ii"/>
                         </constraints>
                     </view>
                     <connections>
@@ -139,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55.072463768115945" y="55.580357142857139"/>
+            <point key="canvasLocation" x="-55.813953488372093" y="55.36480686695279"/>
         </scene>
     </scenes>
     <resources>
