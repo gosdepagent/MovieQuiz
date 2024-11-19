@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+ protocol AlertPresenterDelegate: AnyObject {
+ func showAlert(with model: AlertModel)
+ }
+

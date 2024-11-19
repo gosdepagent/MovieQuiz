@@ -8,7 +8,7 @@
 import Foundation
 
 class QuestionFactory: QuestionFactoryProtocol {
-    weak var delegate: QuestionFactoryDelegate?  // Добавлено свойство делегата
+    weak var delegate: QuestionFactoryDelegate?  
 
     func setup(delegate: QuestionFactoryDelegate) {
         self.delegate = delegate
@@ -33,7 +33,6 @@ class QuestionFactory: QuestionFactoryProtocol {
             return
         }
 
-        // Убедитесь, что индекс в пределах массива
         if index >= 0 && index < questions.count {
             let question = questions[index]
             delegate?.didReceiveNextQuestion(question: question)
