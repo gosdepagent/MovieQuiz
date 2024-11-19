@@ -19,7 +19,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
             return
         }
         let givenAnswer = true
-        
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
     
@@ -110,7 +109,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
                     
             let resultMessage = "\nКоличество сыгранных игр: \(totalGames)\n🏆 Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date))\nСредняя точность: \(String(format: "%.2f", averageAccuracy))%"
 
-            
             let resultViewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
                 text: resultMessage,
@@ -134,10 +132,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
             preferredStyle: .alert
         )
         
-        let action = UIAlertAction(title: result.buttonText, style: .default) { _ in
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            self.questionFactory?.requestNextQuestion()
+        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
+            self?.currentQuestionIndex = 0
+            self?.correctAnswers = 0
+            self?.questionFactory?.requestNextQuestion()
         }
         
         alert.addAction(action)
