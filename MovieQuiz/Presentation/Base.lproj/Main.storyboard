@@ -122,14 +122,19 @@
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="Ise-85-UkM"/>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="65K-Nk-uH0">
+                                <rect key="frame" x="205" y="456" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EnQ-wp-DTf" secondAttribute="bottom" id="Qwh-yO-cdm"/>
+                            <constraint firstItem="65K-Nk-uH0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SED-NK-S3K"/>
                             <constraint firstItem="EnQ-wp-DTf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gHp-c9-j2k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EnQ-wp-DTf" secondAttribute="trailing" constant="20" id="n8b-Hs-Phm"/>
                             <constraint firstItem="EnQ-wp-DTf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qxE-WP-1ii"/>
+                            <constraint firstItem="65K-Nk-uH0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zKG-E7-hfA"/>
                         </constraints>
                     </view>
                     <connections>

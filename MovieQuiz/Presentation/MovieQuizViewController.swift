@@ -2,7 +2,7 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  {
-   
+    
     @IBOutlet private weak var questionTitleLabel: UILabel!
     @IBAction private func noButtonClicked(_ sender: Any) {
         guard let currentQuestion = currentQuestion else {
@@ -26,6 +26,43 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
     @IBOutlet private weak var noButton: UIButton!
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var counterLabel: UILabel!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
+        activityIndicator.startAnimating() // включаем анимацию
+    }
+    
+    private func hideLoadingIndicator() {
+        activityIndicator.isHidden = true // скрываем индикатор
+        activityIndicator.stopAnimating() // останавливаем анимацию
+    }
+    
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true // скрываем индикатор загрузки
+        questionFactory?.requestNextQuestion()
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
+    }
+    
+    private func showNetworkError(message: String) {
+        hideLoadingIndicator()
+        
+        let model = AlertModel(title: "Ошибка",
+                               message: message,
+                               buttonText: "Попробовать еще раз") { [weak self] in
+            guard let self = self else { return }
+            
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            
+            self.questionFactory?.requestNextQuestion()
+        }
+        
+        alertPresenter.show(in: self, model: model)
+    }
     
     private var statisticService: StatisticServiceProtocol!
     private let questionsAmount: Int = 10
@@ -39,9 +76,15 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         
         statisticService = StatisticService()
         
-        let questionFactory = QuestionFactory()
-                questionFactory.setup(delegate: self)
-                self.questionFactory = questionFactory
+        showLoadingIndicator()
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+        questionFactory?.loadData()
+        
+        
+        
+        let questionFactory = QuestionFactory(moviesLoader: <#MoviesLoading#>, delegate: <#QuestionFactoryDelegate?#>)
+        questionFactory.setup(delegate: self)
+        self.questionFactory = questionFactory
         
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
@@ -54,15 +97,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         
         questionFactory.requestNextQuestion()
         
-        func showQuizStep(_ step: QuizStepViewModel)  {
-            imageView.image = step.image
-            textLabel.text = step.question
-            counterLabel.text = step.questionNumber
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.showNextQuestionOrResults()
-            }
-        }
     }
     
     private func showQuizStep(_ step: QuizStepViewModel) {
@@ -70,6 +104,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
         imageView.layer.borderColor = UIColor.clear.cgColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.showNextQuestionOrResults()
+        }
+        
     }
     
     private func showAnswerResult(isCorrect: Bool) {
@@ -91,24 +129,23 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
     }
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
-            question: model.text, // 3
+        return QuizStepViewModel(
+            image: UIImage(data: model.image) ?? UIImage(),
+            question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
-        return questionStep
     }
     
     func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-        
+            
             statisticService.store(correct: correctAnswers, total: questionsAmount)
-                    
-                    let totalGames = statisticService.gamesCount
-                    let bestGame = statisticService.bestGame
-                    let averageAccuracy = statisticService.totalAccuracy
-                    
+            
+            let totalGames = statisticService.gamesCount
+            let bestGame = statisticService.bestGame
+            let averageAccuracy = statisticService.totalAccuracy
+            
             let resultMessage = "\nКоличество сыгранных игр: \(totalGames)\n🏆 Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date))\nСредняя точность: \(String(format: "%.2f", averageAccuracy))%"
-
+            
             let resultViewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
                 text: resultMessage,
@@ -124,7 +161,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
             questionFactory?.requestNextQuestion()
         }
     }
-
+    
     func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
             title: result.title,
@@ -141,14 +178,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     // MARK: - QuestionFactoryDelegate
-
+    
     func didReceiveNextQuestion(question: QuizQuestion?) {
         guard let question = question else {
             return
         }
-
+        
         currentQuestion = question
         let viewModel = convert(model: question)
         
