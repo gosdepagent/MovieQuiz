@@ -22,10 +22,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Initializing MovieQuizViewController...")
         statisticService = StatisticService()
         alertPresenter = AlertPresenter(delegate: self)
         
         setupUI()
+        print("Showing loading indicator...")
         
         showLoadingIndicator()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
@@ -36,6 +38,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         questionFactory.setup(delegate: self)
         self.questionFactory = questionFactory
         
+        print("Request Next question")
         questionFactory.requestNextQuestion()
         
     }
@@ -205,6 +208,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func showNetworkError(message: String) {
+        print("Ошибка сети")
         hideLoadingIndicator()
         
         let model = AlertModel(title: "Ошибка",
