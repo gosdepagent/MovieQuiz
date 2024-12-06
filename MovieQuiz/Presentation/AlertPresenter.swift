@@ -18,7 +18,6 @@ class AlertPresenter {
     func presentAlert(with model: AlertModel) {
         delegate?.showAlert(with: model)
         }
-        
     }
     
 

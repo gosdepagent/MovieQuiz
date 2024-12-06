@@ -31,15 +31,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         questionFactory?.loadData()
         
-        let questionFactory = QuestionFactory(moviesLoader: <#MoviesLoading#>, delegate: <#QuestionFactoryDelegate?#>)
+        let questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+
         questionFactory.setup(delegate: self)
         self.questionFactory = questionFactory
         
         questionFactory.requestNextQuestion()
         
     }
-    
-    
     
     private func setupUI() {
         imageView.layer.cornerRadius = 20
@@ -69,22 +68,26 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func showLoadingIndicator() {
-        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
-        activityIndicator.startAnimating() // включаем анимацию
+        print("Показать индикатор загрузки.")
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
     }
     
     private func hideLoadingIndicator() {
-        activityIndicator.isHidden = true // скрываем индикатор
-        activityIndicator.stopAnimating() // останавливаем анимацию
+        print("Скрыть индикатор загрузки.")
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     func didLoadDataFromServer() {
-        activityIndicator.isHidden = true // скрываем индикатор загрузки
+        print("Данные успешно загружены с сервера.")
+        activityIndicator.isHidden = true
         questionFactory?.requestNextQuestion()
     }
     
     func didFailToLoadData(with error: Error) {
-        showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
+        print("Ошибка при загрузке данных с сервера: \(error.localizedDescription)")
+        showNetworkError(message: error.localizedDescription)
     }
     
     func showAlert(with model: AlertModel) {
@@ -200,8 +203,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             self?.showQuizStep(viewModel)
         }
     }
-    
-    // MARK: - Network Error
     
     private func showNetworkError(message: String) {
         hideLoadingIndicator()
