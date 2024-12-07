@@ -121,10 +121,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             }
         }
     }
-
     
     private func showAnswerResult(isCorrect: Bool) {
-        
         yesButton.isEnabled = false
         noButton.isEnabled = false
         
@@ -136,10 +134,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            
             self.showNextQuestionOrResults()
         }
     }
+
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
