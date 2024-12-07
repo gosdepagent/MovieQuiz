@@ -32,14 +32,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         showLoadingIndicator()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         questionFactory?.loadData()
-        
-        let questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
-
-        questionFactory.setup(delegate: self)
-        self.questionFactory = questionFactory
-        
+    
         print("Request Next question")
-        questionFactory.requestNextQuestion()
+        questionFactory?.requestNextQuestion()
         
     }
     
@@ -61,11 +56,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     @IBAction private func yesButtonClicked(_ sender: Any) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        
-        
+        guard let currentQuestion = currentQuestion else {return}
         let givenAnswer = true
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
@@ -118,10 +109,19 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
         imageView.layer.borderColor = UIColor.clear.cgColor
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.showNextQuestionOrResults()
+        
+        yesButton.isEnabled = true
+        noButton.isEnabled = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+        
+            if self.imageView.layer.borderColor == UIColor.clear.cgColor {
+                self.showNextQuestionOrResults()
+            }
         }
     }
+
     
     private func showAnswerResult(isCorrect: Bool) {
         
