@@ -18,6 +18,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     var currentQuestionIndex = 0
     var correctAnswers = 0
     var alertPresenter: AlertPresenter?
+    var isAnswered = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         showLoadingIndicator()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         questionFactory?.loadData()
-    
+        
         print("Request Next question")
         questionFactory?.requestNextQuestion()
         
@@ -113,10 +114,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         yesButton.isEnabled = true
         noButton.isEnabled = true
         
+        isAnswered = false
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-        
-            if self.imageView.layer.borderColor == UIColor.clear.cgColor {
+            
+           
+            if self.imageView.layer.borderColor == UIColor.clear.cgColor && self.isAnswered {
                 self.showNextQuestionOrResults()
             }
         }
@@ -125,6 +129,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private func showAnswerResult(isCorrect: Bool) {
         yesButton.isEnabled = false
         noButton.isEnabled = false
+        isAnswered = true
         
         if isCorrect {
             correctAnswers += 1
@@ -140,7 +145,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             self.showNextQuestionOrResults()
         }
     }
-
+    
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(

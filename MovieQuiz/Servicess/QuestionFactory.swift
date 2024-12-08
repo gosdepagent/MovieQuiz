@@ -12,6 +12,7 @@ class QuestionFactory: QuestionFactoryProtocol {
     private var delegate: QuestionFactoryDelegate?
 
     private var movies: [MostPopularMovie] = []
+    private var isAwaitingAnswer: Bool = false
     
     // Убедитесь, что делегат корректно установлен
     init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate?) {
