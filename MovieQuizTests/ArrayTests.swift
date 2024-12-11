@@ -13,10 +13,8 @@ class ArrayTests: XCTestCase {
     func testGetValueInRange() throws {
         // given
         let array = [1,1,2,3,4]
-        
         // when
         let value = array[safe:2]
-        
         //then
         XCTAssertNotNil(value)
         XCTAssertEqual(value,2)
