@@ -18,6 +18,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
        override func viewDidLoad() {
            super.viewDidLoad()
 
+           counterLabel.accessibilityIdentifier = "Index"
            presenter = MovieQuizPresenter(viewController: self)
 
            yesButton.layer.cornerRadius = 20
@@ -86,6 +87,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
                title: "Ошибка",
                message: message,
                preferredStyle: .alert)
+           
 
                let action = UIAlertAction(title: "Попробовать ещё раз",
                style: .default) { [weak self] _ in

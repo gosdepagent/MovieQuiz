@@ -18,6 +18,10 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private let questionsAmount: Int = 10
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
+    var correctAnswersCount: Int {
+        return correctAnswers
+    }
+
 
     init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController
