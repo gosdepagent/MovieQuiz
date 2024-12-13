@@ -20,7 +20,10 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
 
            presenter = MovieQuizPresenter(viewController: self)
 
+           yesButton.layer.cornerRadius = 20
+            noButton.layer.cornerRadius = 20
            imageView.layer.cornerRadius = 20
+        
        }
 
        // MARK: - Actions

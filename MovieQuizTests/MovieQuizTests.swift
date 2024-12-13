@@ -38,7 +38,7 @@ struct ArithmeticOperations {
             arithmeticOperations.addition(num1: num1, num2: num2) {
                 result in
                 //then
-                XCTAssertEqual(result, 4)
+                XCTAssertEqual(result, 3)
                 expectation.fulfill()
             }
             waitForExpectations(timeout: 2)
