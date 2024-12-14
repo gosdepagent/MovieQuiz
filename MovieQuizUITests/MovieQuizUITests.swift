@@ -18,55 +18,59 @@ final class MovieQuizUITests: XCTestCase {
     }
     
     func testNoButton() {
-        // Убедитесь, что изображение Poster доступно
+        sleep(2)
         XCTAssertTrue(app.images["Poster"].waitForExistence(timeout: 5), "Poster image did not appear")
 
-        // Убедитесь, что кнопка No существует
+        sleep(2)
         XCTAssertTrue(app.buttons["No"].waitForExistence(timeout: 5), "No button did not appear")
         app.buttons["No"].tap()
 
-        // Убедитесь, что после нажатия кнопки появился новый постер
+        sleep(2)
         XCTAssertTrue(app.images["Poster"].waitForExistence(timeout: 5), "Poster image did not appear after tap")
 
-        // Убедитесь, что элемент Index существует
+        sleep(2)
         let indexLabel = app.staticTexts["Index"]
         XCTAssertTrue(indexLabel.waitForExistence(timeout: 5), "Index label does not exist")
         XCTAssertEqual(indexLabel.label, "2/10", "Index label is not updated correctly")
     }
 
     func testYesButton() {
-        sleep(3)
+        sleep(2)
         let firstPoster = app.images["Poster"]
         let firstPosterData = firstPoster.screenshot().pngRepresentation
         
+        sleep(2)
         app.buttons["Yes"].tap()
-        sleep(3)
-        
+    
+        sleep(2)
         let secondPoster = app.images["Poster"]
         let secondPosterData = secondPoster.screenshot().pngRepresentation
         
+        sleep(2)
         let indexLabel = app.staticTexts["Index"]
         
+        sleep(2)
         XCTAssertNotEqual(firstPosterData, secondPosterData)
         XCTAssertEqual(indexLabel.label, "2/10")
     }
     
     func testGameFinish() {
         sleep(2)
-        
-        // Имитируем ответы на вопросы
         for _ in 1...10 {
             app.buttons["No"].tap()
             sleep(2)
         }
-
+        sleep(2)
         let alert = app.alerts.element(boundBy: 0)
 
+        sleep(2)
         XCTAssertTrue(alert.waitForExistence(timeout: 5), "Game results alert not found")
         
+        sleep(2)
         let alertTitle = alert.staticTexts.element(boundBy: 0).label
         XCTAssertTrue(alertTitle == "Этот раунд окончен!", "Alert title is incorrect")
         
+        sleep(2)
         let buttonText = alert.buttons.firstMatch.label
         XCTAssertTrue(buttonText == "Сыграть ещё раз", "Retry button text is incorrect")
     }
@@ -78,19 +82,17 @@ final class MovieQuizUITests: XCTestCase {
             app.buttons["No"].tap()
             sleep(2)
         }
-        
-        // Ищем алерт с текстом, который точно появляется
+
+        sleep(2)
         let alert = app.alerts.element(boundBy: 0)
         XCTAssertTrue(alert.waitForExistence(timeout: 5), "Game results alert not found")
-        
-        // Нажимаем на кнопку "Сыграть ещё раз"
+
+        sleep(2)
         let retryButton = alert.buttons["Сыграть ещё раз"]
         XCTAssertTrue(retryButton.exists, "Retry button not found")
         retryButton.tap()
         
         sleep(2)
-        
-        // Проверяем, что алерт был закрыт
         let indexLabel = app.staticTexts["Index"]
         XCTAssertTrue(indexLabel.waitForExistence(timeout: 5), "Index label does not exist after dismissing alert")
         XCTAssertTrue(indexLabel.label == "1/10", "Index label is not updated correctly after restarting game")
